@@ -1,7 +1,13 @@
 package coinbase
 
+type Channel struct {
+	Name					string		`json:"name"`
+	ProductIds		[]string 	`json:"product_ids"`
+}
+
 type Message struct {
 	Type          string     `json:"type"`
+	Channels 			[]Channel `json:"channels"`
 	ProductId     string     `json:"product_id"`
 	TradeId       int        `json:"trade_id,number"`
 	OrderId       string     `json:"order_id"`

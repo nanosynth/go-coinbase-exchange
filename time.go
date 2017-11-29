@@ -50,7 +50,10 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	*t = Time(parsedTime)
+	timeLoc, timeErr := time.LoadLocation("Local")
+	if timeErr != nil { fmt.Println(timeErr.Error()) }
+
+	*t = Time(parsedTime.In(timeLoc))
 
 	return nil
 }

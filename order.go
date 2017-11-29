@@ -52,6 +52,24 @@ func (c *Client) CancelOrder(id string) error {
 	return err
 }
 
+func (c *Client) CancelAllOrders(id ...string) (err error) {
+	if len(id) == 0 {
+		url := fmt.Sprintf("/orders")
+		_, err = c.Request("DELETE", url, nil, nil)
+	} else if len(id) == 1 {
+		url := fmt.Sprintf("/orders?product_id=%s", id[0])
+		_, err = c.Request("DELETE", url, nil, nil)
+
+		// var cancelIdOrder = Order{
+		// 	ProductId: id[0],
+		// }
+		// url := fmt.Sprintf("/orders")
+		// _, err = c.Request("DELETE", url, cancelIdOrder, nil)
+	}
+	return err
+}
+
+
 func (c *Client) GetOrder(id string) (Order, error) {
 	var savedOrder Order
 
